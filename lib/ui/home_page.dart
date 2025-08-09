@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:Food_Recognize/ui/bottom_sheet_choice_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,10 +16,10 @@ class HomePage extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Food Recognizer App'),
       ),
-      body: SafeArea(
+      body: const SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: const _HomeBody(),
+          padding: EdgeInsets.all(8.0),
+          child: _HomeBody(),
         ),
       ),
     );
@@ -36,7 +38,6 @@ class _HomeBody extends StatelessWidget {
         Expanded(
           child: Center(
             child: GestureDetector(
-              // todo-01: tap this icon to open image picker feature
               onTap: () {
                 showModalBottomSheet(
                   context: context,
@@ -50,9 +51,18 @@ class _HomeBody extends StatelessWidget {
                   },
                 );
               },
-              child: const Align(
-                alignment: Alignment.center,
-                child: Icon(Icons.image, size: 100),
+              child: Consumer<HomeController>(
+                builder: (context, controller, _) {
+                  if (controller.selectedImagePath != null) {
+                    return Image.file(
+                      File(controller.selectedImagePath!),
+                      fit: BoxFit.cover,
+                      width: 200,
+                      height: 200,
+                    );
+                  }
+                  return const Icon(Icons.image, size: 100);
+                },
               ),
             ),
           ),
