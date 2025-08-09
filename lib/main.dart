@@ -1,7 +1,7 @@
+import 'package:Food_Recognize/ui/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:submission/controller/home_controller.dart';
-import 'package:submission/ui/home_page.dart';
+import 'controller/home_controller.dart';
 
 void main() {
   runApp(
