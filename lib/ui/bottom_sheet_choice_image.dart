@@ -1,7 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+
+import '../controller/home_controller.dart';
 
 class BottomSheetChoiceImage extends StatelessWidget {
   const BottomSheetChoiceImage({super.key});
+
+  Future<void> _pickFromGallery(BuildContext context) async {
+    final homeController = context.read<HomeController>();
+    final ImagePicker picker = ImagePicker();
+    final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      homeController.setImage(pickedFile.path);
+    }
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +28,9 @@ class BottomSheetChoiceImage extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.photo),
             title: const Text('Gallery'),
-            onTap: () {
+            onTap: () async {
+              await _pickFromGallery(context);
               Navigator.pop(context);
-              // TODO: Panggil fungsi ambil gambar dari galeri
             },
           ),
           ListTile(
