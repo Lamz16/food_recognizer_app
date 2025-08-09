@@ -1,3 +1,4 @@
+import 'package:Food_Recognize/ui/bottom_sheet_choice_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -35,8 +36,19 @@ class _HomeBody extends StatelessWidget {
         Expanded(
           child: Center(
             child: GestureDetector(
+              // todo-01: tap this icon to open image picker feature
               onTap: () {
-                // todo-01: tap this icon to open image picker feature
+                showModalBottomSheet(
+                  context: context,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(16),
+                    ),
+                  ),
+                  builder: (BuildContext context) {
+                    return const BottomSheetChoiceImage();
+                  },
+                );
               },
               child: const Align(
                 alignment: Alignment.center,
