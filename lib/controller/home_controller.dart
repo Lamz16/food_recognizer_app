@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../ui/result_page.dart';
 
 class HomeController extends ChangeNotifier {
-
   String? selectedImagePath;
 
   void setImage(String path) {

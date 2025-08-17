@@ -17,7 +17,16 @@ class BottomSheetChoiceImage extends StatelessWidget {
     }
   }
 
+  Future<void> _pickFromCamera(BuildContext context) async {
+    final homeController = context.read<HomeController>();
+    final ImagePicker picker = ImagePicker();
+    final XFile? pickedFile =
+    await picker.pickImage(source: ImageSource.camera);
 
+    if (pickedFile != null) {
+      homeController.setImage(pickedFile.path);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +45,8 @@ class BottomSheetChoiceImage extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.camera_alt),
             title: const Text('Camera'),
-            onTap: () {
+            onTap: () async {
+              await _pickFromCamera(context);
               Navigator.pop(context);
               // TODO: Panggil fungsi ambil gambar dari kamera
             },
