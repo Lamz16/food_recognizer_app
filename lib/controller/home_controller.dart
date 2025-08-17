@@ -11,9 +11,13 @@ class HomeController extends ChangeNotifier {
   }
 
   void goToResultPage(BuildContext context) {
+    if (selectedImagePath == null) return;
+
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ResultPage()),
+      MaterialPageRoute(
+        builder: (context) => ResultPage(imagePath: selectedImagePath!),
+      ),
     );
   }
 }
